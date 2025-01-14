@@ -1,0 +1,1 @@
+Pour faire fonctionner l'application correctement, il faut tout d'abord lancer le serveur postgreSQL
