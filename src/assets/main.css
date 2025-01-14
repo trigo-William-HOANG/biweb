@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root{
     --bleutrigo: #004983;
     --verttrigo: #a8c855;
