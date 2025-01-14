@@ -5,7 +5,7 @@ import { useAuth } from './composables/useAuth';
 
 const { checkAuth } = useAuth();
 
-// Define routes with auth requirements
+// Définitions des routes avec les conditions d'authentification
 const routes = {
   '/': {
     component: Home,
@@ -13,10 +13,10 @@ const routes = {
   }
 };
 
-// Reactive variable for the current path
+// récupération de l'url courante
 const currentPath = ref(window.location.pathname);
 
-// Function to update currentPath with auth check
+// SI UTILISATEUR PAS AUTHENTIFIER, REDIRIGERER VERS LA PAGE DE CONNEXION DE L'AD
 const updatePath = async () => {
   const path = window.location.pathname;
   const route = routes[path];
@@ -32,13 +32,13 @@ const updatePath = async () => {
   currentPath.value = path;
 };
 
-// Listen for changes to the URL
+// Fonction d'écoute pour changement d'URL
 window.addEventListener("popstate", updatePath);
 
 // Initial auth check
 updatePath();
 
-// Compute the component to render based on the current path
+// Fonction pour afficher les composants en fonction de l'url (si l'url n'existe pas, afficher la page 404)
 const currentView = computed(() => {
   return (routes[currentPath.value] || routes['/404']).component;
 });

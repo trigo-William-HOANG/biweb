@@ -47,68 +47,22 @@ onMounted(async () => {
   if (!auth) {
     window.location.href = 'http://localhost:5000/auth/signin' // A changer avec le lien de connexion de l'API
   }
+  fetchCardData();
 })
 
-import app1 from '../assets/app1.webp';
-import app2 from '../assets/app2.webp';
-import app3 from '../assets/app3.webp';
+const cardData = ref([]);
 
-const cardData = [
-  {
-    image: app1,
-    title: 'A 1',
-    description: 'Description pour la carte 1.',
-    link: '/test'
-  },
-  {
-    image: app2,
-    title: 'B 2',
-    description: 'Description pour la carte 2.',
-    link: '#'
-  },
-  {
-    image: app3,
-    title: 'C 3',
-    description: 'Description pour la carte 3.',
-    link: '#'
-  },
-  {
-    image: app3,
-    title: 'C 3',
-    description: 'Description pour la carte 3.',
-    link: '#'
-  },
-  {
-    image: app3,
-    title: 'C 3',
-    description: 'Description pour la carte 3.',
-    link: '#'
-  },
-  {
-    image: app3,
-    title: 'C 3',
-    description: 'Description pour la carte 3.',
-    link: '#'
-  },
-  {
-    image: app3,
-    title: 'C 3',
-    description: 'Description pour la carte 3.',
-    link: '#'
-  },
-  {
-    image: app3,
-    title: 'C 3',
-    description: 'Description pour la carte 3.',
-    link: '#'
-  },
-  {
-    image: app3,
-    title: 'C 3',
-    description: 'Description pour la carte 3.',
-    link: '#'
+const fetchCardData = async () => {
+  try {
+    const response = await fetch('http://localhost/api');
+    const data = await response.json();
+    cardData.value = data;
+  } catch (error) {
+    console.error('Error fetching card data:', error);
+    cardData.value = []; // Set empty array on error
   }
-];
+};
+
 
 const searchQuery = ref('');
 const isLoading = ref(false);
